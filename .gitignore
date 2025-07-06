@@ -1,0 +1,7 @@
+# Ignore sensitive files
+.env
+*.log
+
+# Ignore cache/temp files
+.DS_Store
+*.tmp
