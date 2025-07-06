@@ -18,7 +18,6 @@ keybinds clear-defaults=true {
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "normal"; }
         bind "f" { ToggleFocusFullscreen; SwitchToMode "normal"; }
         bind "h" { MoveFocus "left"; }
-        bind "i" { TogglePanePinned; SwitchToMode "normal"; }
         bind "j" { MoveFocus "down"; }
         bind "k" { MoveFocus "up"; }
         bind "l" { MoveFocus "right"; }
@@ -280,7 +279,7 @@ load_plugins {
 //   - true
 //   - false (Default)
 // 
-simplified_ui true
+simplified_ui false
  
 // Choose the theme that is specified in the themes section.
 // Default: default
