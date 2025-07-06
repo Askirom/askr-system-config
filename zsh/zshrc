@@ -1,0 +1,15 @@
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+fpath=(/opt/homebrew/share/zsh-completions $fpath)
+source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
+
+export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
+export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
+autoload -U compinit
+compinit
+# Add to ~/.zshrc
+if [[ -z "$ZELLIJ" ]]; then
+    # Create unique session per terminal window
+    zellij 
+fi
+alias zlist='zellij list-sessions'
+alias zswitch='zellij attach'
