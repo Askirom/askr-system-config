@@ -8,6 +8,7 @@ Personal configuration files for my development setup.
 - `wezterm/` - WezTerm terminal configuration
 - `homebrew/` - Brewfile for package management
 - `scripts/` - Custom scripts and utilities
+- `zellij/` - Zellij multiplexer configuration
 
 ## Setup
 
