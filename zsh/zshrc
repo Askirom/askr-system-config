@@ -1,5 +1,6 @@
  # Platform-dependent configuration
-  if [[ "$OSTYPE" == "darwin"* ]]; then
+PS1='%n@%m:%~%# ' 
+ if [[ "$OSTYPE" == "darwin"* ]]; then
       # macOS with Homebrew
       source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
       fpath=(/opt/homebrew/share/zsh-completions $fpath)
