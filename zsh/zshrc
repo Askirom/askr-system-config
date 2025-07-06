@@ -1,15 +1,56 @@
-source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-fpath=(/opt/homebrew/share/zsh-completions $fpath)
-source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
+ # Platform-dependent configuration
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+      # macOS with Homebrew
+      source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      fpath=(/opt/homebrew/share/zsh-completions $fpath)
+      source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
 
-export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
-export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
-autoload -U compinit
-compinit
-# Add to ~/.zshrc
-if [[ -z "$ZELLIJ" ]]; then
-    # Create unique session per terminal window
-    zellij 
-fi
-alias zlist='zellij list-sessions'
-alias zswitch='zellij attach'
+      export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
+      export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
+
+  elif [[ "$OSTYPE" == "linux"* ]]; then
+      # Linux (including Steam Deck)
+
+      # Try common Linux package manager paths
+      if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+          source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+      elif [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]];
+  then
+          source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+      fi
+
+      if [[ -d /usr/share/zsh-completions ]]; then
+          fpath=(/usr/share/zsh-completions $fpath)
+      elif [[ -d /usr/share/zsh/site-functions ]]; then
+          fpath=(/usr/share/zsh/site-functions $fpath)
+      fi
+
+      if [[ -f /usr/share/zsh-you-should-use/you-should-use.plugin.zsh ]]; then
+          source /usr/share/zsh-you-should-use/you-should-use.plugin.zsh
+      fi
+
+      # Steam Deck specific paths
+      if [[ -f /etc/os-release ]] && grep -q "Steam" /etc/os-release; then
+          # Steam Deck detected
+          export VAULT="/home/deck/Documents/Askr.Vault-2506"
+      else
+          # Regular Linux
+          export VAULT="$HOME/Documents/Askr.Vault-2506"
+      fi
+
+      # OneDrive path for Linux (adjust as needed)
+      export ONEDRIVE="$HOME/OneDrive"
+  fi
+
+  # Common configuration (works on all platforms)
+  autoload -U compinit
+  compinit
+
+  # Zellij integration (if available)
+  if command -v zellij &> /dev/null; then
+      if [[ -z "$ZELLIJ" ]]; then
+          zellij
+      fi
+      alias zlist='zellij list-sessions'
+      alias zswitch='zellij attach'
+  fi
