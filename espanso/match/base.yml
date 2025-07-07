@@ -147,7 +147,7 @@ matches:
 
       📧 robin@askirom.eu
       📱 +49 170 7602009
-  - trigger: ";pmsig2"
+  - trigger: ";mmsig2"
     replace: |
       Mit freundlichen Grüßen / Best regards
 
