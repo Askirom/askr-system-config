@@ -50,3 +50,146 @@ matches:
   - trigger: ";sz"
     replace: "ß"
 
+  # Time and date
+  - trigger: ";dt"
+    replace: "{{date}}"
+    vars:
+      - name: date
+        type: date
+        params:
+          format: "%Y-%m-%d"
+  - trigger: ";tm"
+    replace: "{{time}}"
+    vars:
+      - name: time
+        type: date
+        params:
+          format: "%H:%M"
+
+  # Article 6 GDPR
+  - trigger: ";6a"
+    replace: "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
+  - trigger: ";6b"
+    replace: "Art. 6 Abs. 1 S. 1 lit. b DSGVO"
+  - trigger: ";6c"
+    replace: "Art. 6 Abs. 1 S. 1 lit. c DSGVO"
+  - trigger: ";6d"
+    replace: "Art. 6 Abs. 1 S. 1 lit. d DSGVO"
+  - trigger: ";6e"
+    replace: "Art. 6 Abs. 1 S. 1 lit. e DSGVO"
+  - trigger: ";6f"
+    replace: "Art. 6 Abs. 1 S. 1 lit. f DSGVO"
+
+  # Freigabe Zeiten
+  - trigger: ";frl"
+    replace: |
+      Guten Tag XYZ,
+
+       ich bitte um Freigabe der Zeiten im Anhang für {{monatjahr}}.
+    vars:
+      - name: monatjahr
+        type: date
+        params:
+          format: "%m-%Y"
+          offset: -2592000
+  - trigger: ";frb"
+    replace: "Freigabe der Zeiten für {{monatjahr}}"
+    vars:
+      - name: monatjahr
+        type: date
+        params:
+          format: "%m-%Y"
+          offset: -2592000 # 30 days in seconds
+  - trigger: ";frn"
+    replace: |
+      Guten Tag XYZ,
+
+      ich bitte um Freigabe der Zeiten im Anhang für {{monatjahr}}.
+    vars:
+      - name: monatjahr
+        type: date
+        params:
+          format: "%m-%Y"
+  - trigger: ";iso"
+    replace: "{{isodt}}"
+    vars:
+      - name: isodt
+        type: date
+        params:
+          format: "%Y-%m-%dT%H:%M"
+  - trigger: ";tdt"
+    replace: "tag date #{{tagdate}}"
+    vars:
+      - name: tagdate
+        type: date
+        params:
+          format: "%Y/%m/%d"
+  # clipboard
+  - trigger: ";clip"
+    replace: "{{myclip}}"
+    vars:
+      - name: myclip
+        type: clipboard
+  - trigger: ";cb"
+    replace: "- [ ] "
+  - trigger: ";gmsig"
+    replace: |
+      Mit freundlichen Grüßen / Best regards
+
+      Robin Askirom
+
+      📧 robinaskyr@gmail.com
+  - trigger: ";pmsig"
+    replace: |
+      Mit freundlichen Grüßen / Best regards
+
+      Robin Askirom
+
+      📧 robin@askirom.eu
+      📱 +49 170 7602009
+  - trigger: ";pmsig2"
+    replace: |
+      Mit freundlichen Grüßen / Best regards
+
+      Robin Askirom
+
+      📧 pm@askirom.eu
+  - trigger: ";bvdsig"
+    replace: |
+      Mit freundlichen Grüßen
+
+      Robin Leitner
+      Sprecher der Regionalgruppe Nürnberg im
+      Berufsverband der Datenschutzbeauftragten Deutschlands (BvD) e.V.
+
+      📧 rg-nuernberg@bvdnet.de | 📱 +49 151 56397545
+      🌐 https://www.bvdnet.de/bvd-regionalgruppen/regionalgruppe-nuernberg/
+
+      BvD e.V.
+      Budapester Straße 31
+      10787 Berlin
+      📞 +49 30 26367760 | 📠 +49 30 26367763
+      🌐 https://www.bvdnet.de | 📧 bvd-gs@bvdnet.de
+
+      Vertretungsberechtigt:
+      Thomas Spaeing, Vorstandsvorsitzender
+      eingetragener Verein:
+      Amtsgericht Charlottenburg, VR 27190B
+
+      Hinweise zum Umgang mit personenbezogenen Daten finden Sie unter:
+      https://www.bvdnet.de/home/datenschutz/
+      https://www.bvdnet.de/wp-content/uploads/2018/09/BvD-Information_Art-13_DSGVO.pdf
+  - trigger: ";ssig"
+    replace: |
+      Mit freundlichen Grüßen
+
+      i.V. Robin Leitner
+      Head of Privacy & Information Security, secudor GmbH
+
+      📧 robin.leitner@secudor.de | 📱 +49 151 56397545
+      🌐 www.secudor.de | 🏢 Am Schulhof 1, 91757 Treuchtlingen
+
+      secudor GmbH - VERTRAUEN, DISKRETION, PROFESSIONALITÄT, VERSCHWIEGENHEIT
+
+      Geschäftsführer: Silke Lilienberger-Hauke, Joachim A. Hader
+      Sitz der Gesellschaft: Treuchtlingen | Registergericht: Ansbach, HRB 5986 | USt-ID: DE298369930
