@@ -55,3 +55,10 @@ PS1='%n@%m:%~%# '
 #      alias zlist='zellij list-sessions'
 #      alias zswitch='zellij attach'
 #  fi
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
+alias ls="eza --icons"
+alias ll="eza -l --icons"
+alias la="eza -la --icons"
+alias cat="bat"
+alias cd="z"
