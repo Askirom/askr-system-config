@@ -1,64 +1,65 @@
- # Platform-dependent configuration
-PS1='%n@%m:%~%# ' 
- if [[ "$OSTYPE" == "darwin"* ]]; then
-      # macOS with Homebrew
-      source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      fpath=(/opt/homebrew/share/zsh-completions $fpath)
-      source /opt/homebrew/share/zsh-you-should-use/you-should-use.plugin.zsh
+setopt autocd
+setopt correct
 
-      export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
-      export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
+# Platform-dependent configuration
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS with Homebrew
+    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    fpath=(/opt/homebrew/share/zsh-completions $fpath)
 
-  elif [[ "$OSTYPE" == "linux"* ]]; then
-      # Linux (including Steam Deck)
+    export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
+    export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
 
-      # Try common Linux package manager paths
-      if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-          source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-      elif [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]];
-  then
-          source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-      fi
+elif [[ "$OSTYPE" == "linux"* ]]; then
+    # Linux (including Steam Deck)
 
-      if [[ -d /usr/share/zsh-completions ]]; then
-          fpath=(/usr/share/zsh-completions $fpath)
-      elif [[ -d /usr/share/zsh/site-functions ]]; then
-          fpath=(/usr/share/zsh/site-functions $fpath)
-      fi
+    # Try common Linux package manager paths
+    if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+        source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    elif [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
+        source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+    fi
 
-      if [[ -f /usr/share/zsh-you-should-use/you-should-use.plugin.zsh ]]; then
-          source /usr/share/zsh-you-should-use/you-should-use.plugin.zsh
-      fi
+    if [[ -d /usr/share/zsh-completions ]]; then
+        fpath=(/usr/share/zsh-completions $fpath)
+    elif [[ -d /usr/share/zsh/site-functions ]]; then
+        fpath=(/usr/share/zsh/site-functions $fpath)
+    fi
 
-      # Steam Deck specific paths
-      if [[ -f /etc/os-release ]] && grep -q "Steam" /etc/os-release; then
-          # Steam Deck detected
-          export VAULT="/home/deck/Documents/Askr.Vault-2506"
-      else
-          # Regular Linux
-          export VAULT="$HOME/Documents/Askr.Vault-2506"
-      fi
+    # Steam Deck specific paths
+    if [[ -f /etc/os-release ]] && grep -q "Steam" /etc/os-release; then
+        # Steam Deck detected
+        export VAULT="/home/deck/Documents/Askr.Vault-2506"
+    else
+        # Regular Linux
+        export VAULT="$HOME/Documents/Askr.Vault-2506"
+    fi
 
-      # OneDrive path for Linux (adjust as needed)
-      export ONEDRIVE="$HOME/OneDrive"
-  fi
+    # OneDrive path for Linux (adjust as needed)
+    export ONEDRIVE="$HOME/OneDrive"
+fi
 
-  # Common configuration (works on all platforms)
-  autoload -U compinit
-  compinit
+# Common configuration
+autoload -U compinit
+compinit
 
-  # Zellij integration (if available)
-# if command -v zellij &> /dev/null; then
-#      if [[ -z "$ZELLIJ" ]]; then
-#          zellij
-#      fi
-#      alias zlist='zellij list-sessions'
-#      alias zswitch='zellij attach'
-#  fi
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
 alias ls="eza --icons"
 alias ll="eza -l --icons"
 alias la="eza -la --icons"
 alias cat="bat"
 alias cd="z"
+
+# ---- Add this at the END for best results ----
+# Zsh Syntax Highlighting
+# (For macOS Homebrew install)
+if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# (For Intel macs or common Linux)
+elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+elif [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
