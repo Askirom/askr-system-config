@@ -48,10 +48,10 @@ PS1='%n@%m:%~%# '
   compinit
 
   # Zellij integration (if available)
-  if command -v zellij &> /dev/null; then
-      if [[ -z "$ZELLIJ" ]]; then
-          zellij
-      fi
-      alias zlist='zellij list-sessions'
-      alias zswitch='zellij attach'
-  fi
+# if command -v zellij &> /dev/null; then
+#      if [[ -z "$ZELLIJ" ]]; then
+#          zellij
+#      fi
+#      alias zlist='zellij list-sessions'
+#      alias zswitch='zellij attach'
+#  fi
