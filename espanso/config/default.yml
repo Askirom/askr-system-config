@@ -17,6 +17,7 @@
 # toggle_key: ALT
 # You can also disable the toggle key completely with
 toggle_key: null
+search_shortcut: OFF
 # --- Injection Backend
 
 # Espanso supports multiple ways of injecting text into applications. Each of
