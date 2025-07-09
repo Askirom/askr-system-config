@@ -1,75 +1,80 @@
+-- obsidian.nvim configuration for the PKM-OS v1.0
+-- This file should be placed in your Neovim configuration (e.g., lua/plugins/obsidian.lua)
+
 return {
   "obsidian-nvim/obsidian.nvim",
-  version = "*",
+  version = "*", -- Use the latest version
   lazy = true,
   ft = "markdown",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    -- Add telescope as a dependency since you're using it as picker
-    "nvim-telescope/telescope.nvim",
+    "nvim-telescope/telescope.nvim", -- Your chosen picker
   },
   opts = {
-    -- Single workspace (your vault)
+    -- Define the single workspace for your vault.
+    -- Using a relative path from your home directory (`~`) is standard.
     workspaces = {
       {
-        name = "main",
+        name = "pkm-os",
         path = "~/Documents/Askr.Vault-2506",
       },
     },
 
-    -- Daily notes configuration
+    -- Configure how daily notes are handled.
+    -- Paths are relative to your vault root for portability.
     daily_notes = {
-      folder = "02_Daily",
+      folder = "var/log/dly", -- CORRECTED: Aligned with v0.5 design.
       date_format = "%Y-%m-%d",
       alias_format = "%B %-d, %Y",
-      template = "10_Library/Templates/Template_Daily_Log.md",
+      template = "sys/tpl/TPL-Daily-Log.md", -- CORRECTED: Relative path.
     },
 
-    -- Templates configuration
+    -- Configure note templates.
     templates = {
-      folder = "10_Library/Templates",
+      folder = "sys/tpl", -- CORRECTED: Relative path.
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
     },
 
+    -- Optional: Configure autocompletion behavior.
     completion = {
-      nvim_cmp = false,
-      blink = true,
+      nvim_cmp = false, -- Set to true if you use nvim-cmp
       min_chars = 2,
     },
 
-    -- Change this to a supported picker
+    -- Define the picker for searching notes, etc.
     picker = {
       name = "telescope.nvim",
-      -- Alternative options:
-      -- name = "fzf-lua",
-      -- name = "mini.pick",
     },
 
+    -- Use [[wikilinks]] by default.
     preferred_link_style = "wiki",
 
+    -- This function automatically generates a unique ID for new notes.
+    -- This is the core of your "headless OS" naming strategy.
     note_id_func = function(title)
-      if title ~= nil then
-        -- Replace spaces with hyphens, preserve German characters, convert to lowercase
-        return title:gsub(" ", "-"):gsub("[^A-Za-z0-9-_üäöÜÄÖß]", "")
-      else
-        return tostring(os.time())
-      end
+      -- If title is provided, it will be used as an alias.
+      -- The filename will always be the UID.
+      -- REVERTED: Timestamp format restored to your preference without seconds.
+      return os.date("%Y%m%d%H%M")
     end,
 
+    -- Optional: Customize UI elements like checkbox characters.
     ui = {
       enable = true,
       checkboxes = {
+        -- Using common Nerd Font icons for checkboxes.
         [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-        ["x"] = { char = "", hl_group = "ObsidianDone" },
-        [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+        ["x"] = { char = "✔", hl_group = "ObsidianDone" }, -- IMPROVED: Added a checkmark.
+        [">"] = { char = "▶", hl_group = "ObsidianRightArrow" }, -- IMPROVED: Added a right arrow.
         ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-        ["!"] = { char = "", hl_group = "ObsidianImportant" },
+        ["!"] = { char = "❗", hl_group = "ObsidianImportant" }, -- IMPROVED: Added an exclamation mark.
       },
     },
 
+    -- Use a standard function to open web links.
     follow_url_func = function(url)
-      vim.ui.open(url)
+      vim.fn.jobstart({ "open", url }) -- `open` is the standard command on macOS.
     end,
   },
 }

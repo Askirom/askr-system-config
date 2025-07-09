@@ -66,6 +66,14 @@ matches:
         params:
           format: "%H:%M"
 
+  - trigger: ";uid"
+    replace: "{{uid}}"
+    vars:
+      - name: uid
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+
   # Article 6 GDPR
   - trigger: ";6a"
     replace: "Art. 6 Abs. 1 S. 1 lit. a DSGVO"
