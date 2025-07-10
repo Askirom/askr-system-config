@@ -201,5 +201,123 @@ matches:
 
       Geschäftsführer: Silke Lilienberger-Hauke, Joachim A. Hader
       Sitz der Gesellschaft: Treuchtlingen | Registergericht: Ansbach, HRB 5986 | USt-ID: DE298369930
+  - trigger: ";draft"
+    replace: "[{{mydate}} {{mytime}}] – DRAFT: "
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # REVIEW Primitive
+  - trigger: ";review"
+    replace: "[{{mydate}} {{mytime}}] – REVIEW: "
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # COMMUNICATE Primitive
+  - trigger: ";comm"
+    replace: "[{{mydate}} {{mytime}}] – COMMUNICATE: "
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # PLAN Primitive
+  - trigger: ";plan"
+    replace: "[{{mydate}} {{mytime}}] – PLAN: "
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # DECIDE Primitive
+  - trigger: ";decide"
+    replace: "[{{mydate}} {{mytime}}] – DECIDE: "
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # MAINTAIN Primitive
+  - trigger: ";maintain"
+    replace: "[{{mydate}} {{mytime}}] – MAINTAIN: "
+    vars:
+      - name: mydate
+        type: date
+        params:
+          format: "%Y-%m-%d"
+      - name: mytime
+        type: date
+        params:
+          format: "%H:%M"
+
+  # Quick UID generator for new files
+  - trigger: ";uid"
+    replace: "{{uid}}"
+    vars:
+      - name: uid
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+
+  # Quick alias template
+  - trigger: ";alias"
+    replace: "[[{{uid}}|{{title}}]]"
+    vars:
+      - name: uid
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+      - name: title
+        type: form
+        params:
+          layout: "Title: {{input}}"
+  - trigger: ";uid"
+    replace: "{{uid}}"
+    vars:
+      - name: uid
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+
+  # Quick alias template
+  - trigger: ";alias"
+    replace: "[[{{uid}}|{{title}}]]"
+    vars:
+      - name: uid
+        type: date
+        params:
+          format: "%Y%m%d%H%M"
+      - name: title
+        type: form
+        params:
+          layout: "Title: {{input}}"
 
 toggle_key: OFF

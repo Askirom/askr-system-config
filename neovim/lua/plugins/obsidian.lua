@@ -23,15 +23,15 @@ return {
     -- Configure how daily notes are handled.
     -- Paths are relative to your vault root for portability.
     daily_notes = {
-      folder = "var/log/dly", -- CORRECTED: Aligned with v0.5 design.
+      folder = "var/log/daily", -- CORRECTED: Aligned with v0.5 design.
       date_format = "%Y-%m-%d",
       alias_format = "%B %-d, %Y",
-      template = "sys/tpl/TPL-Daily-Log.md", -- CORRECTED: Relative path.
+      template = "etc/templates/tpl-daily-log.md", -- CORRECTED: Relative path.
     },
 
     -- Configure note templates.
     templates = {
-      folder = "sys/tpl", -- CORRECTED: Relative path.
+      folder = "etc/templates",
       date_format = "%Y-%m-%d",
       time_format = "%H:%M",
     },
