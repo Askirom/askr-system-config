@@ -46,12 +46,6 @@ compinit
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
 
-alias ls="eza --icons"
-alias ll="eza -l --icons"
-alias la="eza -la --icons"
-alias cat="bat"
-alias cd="z"
-
 # ---- Add this at the END for best results ----
 # Zsh Syntax Highlighting
 # (For macOS Homebrew install)

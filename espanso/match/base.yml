@@ -278,16 +278,7 @@ matches:
         params:
           format: "%H:%M"
 
-  # Quick UID generator for new files
-  - trigger: ";uid"
-    replace: "{{uid}}"
-    vars:
-      - name: uid
-        type: date
-        params:
-          format: "%Y%m%d%H%M"
-
-  # Quick alias template
+    # Quick alias template
   - trigger: ";alias"
     replace: "[[{{uid}}|{{title}}]]"
     vars:
@@ -299,15 +290,7 @@ matches:
         type: form
         params:
           layout: "Title: {{input}}"
-  - trigger: ";uid"
-    replace: "{{uid}}"
-    vars:
-      - name: uid
-        type: date
-        params:
-          format: "%Y%m%d%H%M"
-
-  # Quick alias template
+    # Quick alias template
   - trigger: ";alias"
     replace: "[[{{uid}}|{{title}}]]"
     vars:
