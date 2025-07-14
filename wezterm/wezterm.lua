@@ -2,8 +2,7 @@ local wezterm = require("wezterm")
 
 return {
 	color_scheme = "Catppuccin Mocha",
-	font_size = 16.0,
-
+	font_size = 13.0,
 	keys = {
 		-- Sane pane shortcuts
 		{ key = "|", mods = "CTRL|SHIFT", action = wezterm.action.SplitHorizontal({ domain = "CurrentPaneDomain" }) },

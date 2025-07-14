@@ -290,17 +290,5 @@ matches:
         type: form
         params:
           layout: "Title: {{input}}"
-    # Quick alias template
-  - trigger: ";alias"
-    replace: "[[{{uid}}|{{title}}]]"
-    vars:
-      - name: uid
-        type: date
-        params:
-          format: "%Y%m%d%H%M"
-      - name: title
-        type: form
-        params:
-          layout: "Title: {{input}}"
 
 toggle_key: OFF
