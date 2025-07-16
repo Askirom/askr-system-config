@@ -5,7 +5,7 @@ setopt correct
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # macOS with Homebrew
     source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    fpath=(/opt/homebrew/share/zsh-completions $fpath)
+    fpath=("/opt/homebrew/share/zsh-completions" $fpath)
 
     export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
     export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
@@ -21,9 +21,9 @@ elif [[ "$OSTYPE" == "linux"* ]]; then
     fi
 
     if [[ -d /usr/share/zsh-completions ]]; then
-        fpath=(/usr/share/zsh-completions $fpath)
+        fpath=("/usr/share/zsh-completions" $fpath)
     elif [[ -d /usr/share/zsh/site-functions ]]; then
-        fpath=(/usr/share/zsh/site-functions $fpath)
+        fpath=("/usr/share/zsh/site-functions" $fpath)
     fi
 
     # Steam Deck specific paths
@@ -40,12 +40,20 @@ elif [[ "$OSTYPE" == "linux"* ]]; then
 fi
 
 # Common configuration
-autoload -U compinit
-compinit
+export EDITOR="nvim"
+export VISUAL="nvim"
+autoload -Uz compinit
+compinit -C
 
-eval "$(zoxide init zsh)"
-eval "$(starship init zsh)"
+# zoxide (fallback-safe)
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
 
+# starship (fallback-safe)
+if command -v starship &> /dev/null; then
+  eval "$(starship init zsh)"
+fi
 # ---- Add this at the END for best results ----
 # Zsh Syntax Highlighting
 # (For macOS Homebrew install)
@@ -57,3 +65,4 @@ elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; th
 elif [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
     source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
+

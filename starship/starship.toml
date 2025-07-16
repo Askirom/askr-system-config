@@ -30,6 +30,7 @@ style = "yellow"
 [python]
 format = '[py:$version]($style) '
 style = "blue"
+disabled = true
 
 [nodejs]
 format = '[node:$version]($style) '
