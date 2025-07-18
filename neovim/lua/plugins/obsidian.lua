@@ -102,6 +102,13 @@ return {
         end,
         opts = { desc = "Open spool (inbox)" },
       },
+      ["<leader>oo"] = {
+        action = function()
+          local path = vim.fn.expand("%:p")
+          vim.fn.jobstart({ "open", "-a", "Obsidian", path })
+        end,
+        opts = { desc = "Open in Obsidian GUI" },
+      },
     },
   },
 }
