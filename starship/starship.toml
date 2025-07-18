@@ -1,22 +1,45 @@
+# Starship config - clean and functional with nice visual touches
+
+# Keep it clean with no extra newline by default
 add_newline = false
 
-[username]
-show_always = false
+# Two-line format but only when there's enough info to warrant it
+format = """
+$directory$git_branch$git_status$fill$status$cmd_duration$jobs$python$nodejs$rust$golang$java$time
+$character"""
 
-[hostname]
-ssh_only = true
+[fill]
+symbol = "·"
+style = "dim white"
+
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
 
 [directory]
+style = "bold blue"
+format = "[$path]($style) "
 truncation_length = 3
 truncate_to_repo = true
 truncation_symbol = "…/"
+home_symbol = "~"
 
 [git_branch]
 format = "[$branch]($style) "
+style = "purple"
 
 [git_status]
-format = '([$all_status$ahead_behind]($style))'
+format = '([$all_status$ahead_behind]($style) )'
 style = "red"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇡${ahead_count}⇣${behind_count}"
+untracked = "?${count}"
+stashed = "*${count}"
+modified = "!${count}"
+staged = "+${count}"
+deleted = "✘${count}"
 
 [status]
 disabled = false
@@ -27,6 +50,19 @@ min_time = 2000
 format = '⏱ [$duration]($style) '
 style = "yellow"
 
+[jobs]
+symbol = "⚙️"
+number_threshold = 1
+format = "[$symbol$number]($style) "
+style = "blue"
+
+[time]
+disabled = true
+style = "white"
+format = "[$time]($style) "
+time_format = "%H:%M"
+
+# Development environments - clean and minimal
 [python]
 format = '[py:$version]($style) '
 style = "blue"
@@ -36,13 +72,39 @@ disabled = true
 format = '[node:$version]($style) '
 style = "green"
 
-[character]
-success_symbol = "[❯](bold green)"
-error_symbol = "[❯](bold red)"
+[rust]
+format = '[rust:$version]($style) '
+style = "red"
 
-[time]
-disabled = true # set to false if you want
+[golang]
+format = '[go:$version]($style) '
+style = "cyan"
 
-[jobs]
-symbol = "⚙️"
-number_threshold = 1
+[java]
+format = '[java:$version]($style) '
+style = "red"
+
+# Show hostname only when SSH
+[hostname]
+ssh_only = true
+format = "[@$hostname]($style) "
+style = "green"
+
+[username]
+show_always = false
+format = "[$user]($style) "
+style = "yellow"
+
+# Cloud and containers (only when relevant)
+[aws]
+format = '[aws:$profile]($style) '
+style = "orange"
+
+[docker_context]
+format = '[docker:$context]($style) '
+style = "blue"
+
+[kubernetes]
+format = '[k8s:$context]($style) '
+style = "cyan"
+disabled = false
