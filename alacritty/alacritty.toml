@@ -1,21 +1,21 @@
 
 [font]
-size = 13.0
+size = 12.0
 
 [font.normal]
-family = "JetBrainsMono Nerd Font"  # This is the correct name!
+family = "FiraCode Nerd Font"  # This is the correct name!
 style = "Regular"
 
 [font.bold]
-family = "JetBrainsMono Nerd Font"
+family = "FiraCode Nerd Font"
 style = "Bold"
 
 [font.italic]
-family = "JetBrainsMono Nerd Font"
+family = "FiraCode Nerd Font"
 style = "Italic"
 
 [font.bold_italic]
-family = "JetBrainsMono Nerd Font"
+family = "FiraCode Nerd Font"
 style = "Bold Italic"
 
 [general]

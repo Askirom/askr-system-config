@@ -1,0 +1,7 @@
+
+[Desktop Entry]
+Type=Service
+X-KDE-ServiceTypes=KWin/Script
+Name=Focus or Launch Alacritty
+Comment=Focus Alacritty if running, otherwise launch it
+X-KWin-Shortcut=Meta+Alt+Space
