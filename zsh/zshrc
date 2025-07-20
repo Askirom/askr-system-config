@@ -1,68 +1,66 @@
+# ✅ Homebrew shell env (adds cargo, etc.)
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ✅ Options
 setopt autocd
 setopt correct
 
-# Platform-dependent configuration
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    # macOS with Homebrew
-    source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    fpath=("/opt/homebrew/share/zsh-completions" $fpath)
-
-    export ONEDRIVE="/Users/askirom/Library/CloudStorage/OneDrive-secudorGmbH"
-    export VAULT="/Users/askirom/Documents/Askr.Vault-2506"
-
-elif [[ "$OSTYPE" == "linux"* ]]; then
-    # Linux (including Steam Deck)
-
-    # Try common Linux package manager paths
-    if [[ -f /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-        source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    elif [[ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]]; then
-        source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-    fi
-
-    if [[ -d /usr/share/zsh-completions ]]; then
-        fpath=("/usr/share/zsh-completions" $fpath)
-    elif [[ -d /usr/share/zsh/site-functions ]]; then
-        fpath=("/usr/share/zsh/site-functions" $fpath)
-    fi
-
-    # Steam Deck specific paths
-    if [[ -f /etc/os-release ]] && grep -q "Steam" /etc/os-release; then
-        # Steam Deck detected
-        export VAULT="/home/deck/Documents/Askr.Vault-2506"
-    else
-        # Regular Linux
-        export VAULT="$HOME/Documents/Askr.Vault-2506"
-    fi
-
-    # OneDrive path for Linux (adjust as needed)
+### 🧬 Platform detection
+case "$OSTYPE" in
+  darwin*)
+    export ONEDRIVE="$HOME/Library/CloudStorage/OneDrive-secudorGmbH"
+    export VAULT="$HOME/Documents/askr-vault-2506"
+    ;;
+  linux*)
     export ONEDRIVE="$HOME/OneDrive"
-fi
+    if grep -qi "Steam" /etc/os-release 2>/dev/null; then
+      export VAULT="/home/deck/Documents/askr-vault-2506"
+    else
+      export VAULT="$HOME/Documents/askr-vault-2506"
+    fi
+    ;;
+esac
 
-# Common configuration
+### 🔌 Zsh Plugins
+# Autosuggestions
+for plugin in \
+  /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+  /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+  /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh; do
+  [[ -f "$plugin" ]] && source "$plugin" && break
+done
+
+# Completions
+for compdir in \
+  /opt/homebrew/share/zsh-completions \
+  /usr/share/zsh-completions \
+  /usr/share/zsh/site-functions; do
+  [[ -d "$compdir" ]] && fpath+=("$compdir")
+done
+
+# Syntax Highlighting
+for plugin in \
+  /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+  /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+  /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh; do
+  [[ -f "$plugin" ]] && source "$plugin" && break
+done
+
+### 🧠 Editor
 export EDITOR="nvim"
 export VISUAL="nvim"
+
+### ⚡ Completion system
 autoload -Uz compinit
 compinit -C
 
-# zoxide (fallback-safe)
-if command -v zoxide &> /dev/null; then
+### 🚀 Optional tools
+if command -v zoxide &>/dev/null; then
   eval "$(zoxide init zsh)"
 fi
 
-# starship (fallback-safe)
-if command -v starship &> /dev/null; then
+if command -v starship &>/dev/null; then
   eval "$(starship init zsh)"
 fi
-# ---- Add this at the END for best results ----
-# Zsh Syntax Highlighting
-# (For macOS Homebrew install)
-if [[ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-# (For Intel macs or common Linux)
-elif [[ -f /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-elif [[ -f /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-    source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
-
