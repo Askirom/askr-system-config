@@ -1,6 +1,6 @@
 
 [font]
-size = 16.0
+size = 13.0
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"  # This is the correct name!
@@ -27,3 +27,8 @@ import = [
   "~/.config/alacritty/catppuccin-mocha.toml"
 ]
 
+[terminal]
+
+[terminal.shell]
+program = "zellij"
+args = ["attach", "--create", "default"]
