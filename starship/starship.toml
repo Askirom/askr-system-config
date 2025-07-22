@@ -1,16 +1,12 @@
-# Starship config - clean and functional with nice visual touches
-
-# Keep it clean with no extra newline by default
+# Starship config - clean and functional
 add_newline = false
 
-# Two-line format but only when there's enough info to warrant it
+# Two-line prompt format - clean without fill dots
 format = """
-$directory$git_branch$git_status$fill$status$cmd_duration$jobs$python$nodejs$rust$golang$java$time
+$directory$git_branch$git_status$status$cmd_duration$jobs$python$nodejs$rust$golang$java$time
 $character"""
 
-[fill]
-symbol = "·"
-style = "dim white"
+# === CORE PROMPT ELEMENTS ===
 
 [character]
 success_symbol = "[❯](bold green)"
@@ -25,6 +21,7 @@ truncate_to_repo = true
 truncation_symbol = "…/"
 home_symbol = "~"
 
+# === GIT INTEGRATION ===
 [git_branch]
 format = "[$branch]($style) "
 style = "purple"
@@ -41,6 +38,7 @@ modified = "!${count}"
 staged = "+${count}"
 deleted = "✘${count}"
 
+# === STATUS & TIMING ===
 [status]
 disabled = false
 format = '[\[$status\]](red) '
@@ -62,7 +60,7 @@ style = "white"
 format = "[$time]($style) "
 time_format = "%H:%M"
 
-# Development environments - clean and minimal
+# === DEVELOPMENT ENVIRONMENTS ===
 [python]
 format = '[py:$version]($style) '
 style = "blue"
@@ -84,7 +82,7 @@ style = "cyan"
 format = '[java:$version]($style) '
 style = "red"
 
-# Show hostname only when SSH
+# === USER & HOST (SSH only) ===
 [hostname]
 ssh_only = true
 format = "[@$hostname]($style) "
@@ -95,7 +93,7 @@ show_always = false
 format = "[$user]($style) "
 style = "yellow"
 
-# Cloud and containers (only when relevant)
+# === CLOUD & CONTAINERS ===
 [aws]
 format = '[aws:$profile]($style) '
 style = "orange"
