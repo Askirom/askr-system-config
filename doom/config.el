@@ -10,7 +10,7 @@
 ;;       user-mail-address "john@doe.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
-;;
+(add-hook 'emacs-startup-hook #'treemacs)
 ;; - `doom-font' -- the primary font to use
 ;; - `doom-variable-pitch-font' -- a non-monospace font (where applicable)
 ;; - `doom-big-font' -- used for `doom-big-font-mode'; use this for
@@ -41,7 +41,34 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
+(after! org
+  ;; Update agenda files to match your actual structure
+  (setq org-agenda-files '("~/org/inbox.org"
+                           "~/org/tasks.org"
+                           "~/org/tasks-obsidian.org"
+                           "~/org/log-2025.org"
+                           "~/org/calendar-beorg.org"  ; Keep beorg sync
+                           "~/org/jobs/"               ; Include job folders
+                           "~/org/srv/"
+                           "~/org/lib/"))              ; Include service folders
 
+  ;; Update capture templates for your structure
+  (setq org-capture-templates
+        '(("i" "Inbox" entry (file "~/org/inbox.org")
+           "* %?\n  %i\n")
+
+          ("t" "Task" entry (file+headline "~/org/tasks.org" "Tasks")
+           "* TODO %?\n  SCHEDULED: %t\n")
+
+          ("l" "Log Entry" entry (file+datetree "~/org/log-2025.org")
+           "* %U %?\n")
+
+          ("j" "Job Note" entry (file "~/org/jobs/notes.org")
+           "* %?\n  %i\n")))
+  (setq org-id-link-to-org-use-id 'create-if-interactive
+        org-id-track-globally t
+        org-id-locations-file (expand-file-name ".org-id-locations" org-directory)
+        org-id-locations-file-relative t))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
