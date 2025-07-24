@@ -68,8 +68,11 @@
   (setq org-id-link-to-org-use-id 'create-if-interactive
         org-id-track-globally t
         org-id-locations-file (expand-file-name ".org-id-locations" org-directory)
-        org-id-locations-file-relative t))
+        org-id-locations-file-relative t)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
 
+  )
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
 ;;
