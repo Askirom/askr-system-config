@@ -43,14 +43,7 @@
 (setq org-directory "~/org/")
 (after! org
   ;; Update agenda files to match your actual structure
-  (setq org-agenda-files '("~/org/inbox.org"
-                           "~/org/tasks.org"
-                           "~/org/tasks-obsidian.org"
-                           "~/org/log-2025.org"
-                           "~/org/calendar-beorg.org"  ; Keep beorg sync
-                           "~/org/jobs/"               ; Include job folders
-                           "~/org/srv/"
-                           "~/org/lib/"))              ; Include service folders
+  (setq org-agenda-files (directory-files-recursively "~/org" "\\.org$"))              ; Include service folders
 
   ;; Update capture templates for your structure
   (setq org-capture-templates

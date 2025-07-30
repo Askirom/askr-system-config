@@ -49,8 +49,8 @@ for plugin in \
 done
 
 ### 🧠 Editor
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="emacs"
+export VISUAL="emacs"
 
 ### ⚡ Completion system
 autoload -Uz compinit
